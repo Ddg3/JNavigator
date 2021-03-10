@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SearchActivity">
+
+    <TextView
+        android:id="@+id/searchTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        android:text="Search for Medical Journals"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchTitle" />
+
+    <LinearLayout
+        android:id="@+id/scrollContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider3">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/scrollConstraints"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/authorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Author:"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/titleText"
+                app:layout_constraintTop_toBottomOf="@+id/titleText" />
+
+            <TextView
+                android:id="@+id/followText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Follow Up Length:"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/sampleText"
+                app:layout_constraintTop_toBottomOf="@+id/sampleText" />
+
+            <TextView
+                android:id="@+id/studyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Study Type: "
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/followText"
+                app:layout_constraintTop_toBottomOf="@+id/followText" />
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="24dp"
+                android:text="Title:"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/keyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Key Words: "
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/studyText"
+                app:layout_constraintTop_toBottomOf="@+id/studyText" />
+
+            <ImageButton
+                android:id="@+id/addKey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@android:drawable/ic_menu_add"
+                app:layout_constraintStart_toStartOf="@+id/keyText"
+                app:layout_constraintTop_toBottomOf="@+id/keyText"
+                app:srcCompat="@android:drawable/ic_menu_add" />
+
+            <TextView
+                android:id="@+id/sampleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Sample Size:"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/authorText"
+                app:layout_constraintTop_toBottomOf="@+id/authorText" />
+
+            <TextView
+                android:id="@+id/urlText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Url:"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/keyText"
+                app:layout_constraintTop_toBottomOf="@+id/addKey" />
+
+            <Button
+                android:id="@+id/searchButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:text="@android:string/search_go"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/urlText" />
+
+            <Button
+                android:id="@+id/saveSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Save Search Preferences"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchButton" />
+
+            <EditText
+                android:id="@+id/titleField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/titleText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/titleText"
+                app:layout_constraintTop_toTopOf="@+id/titleText" />
+
+            <EditText
+                android:id="@+id/authorField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/authorText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/authorText"
+                app:layout_constraintTop_toTopOf="@+id/authorText" />
+
+            <EditText
+                android:id="@+id/sampleField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:ems="10"
+                android:inputType="number"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/sampleText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/sampleText"
+                app:layout_constraintTop_toTopOf="@+id/sampleText" />
+
+            <EditText
+                android:id="@+id/followField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:ems="10"
+                android:inputType="number"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/followText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/followText"
+                app:layout_constraintTop_toTopOf="@+id/followText" />
+
+            <EditText
+                android:id="@+id/urlField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/urlText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/urlText"
+                app:layout_constraintTop_toTopOf="@+id/urlText" />
+
+            <LinearLayout
+                android:id="@+id/keywords"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/urlText"
+                app:layout_constraintEnd_toStartOf="@+id/addKey"
+                app:layout_constraintStart_toStartOf="@+id/keyText"
+                app:layout_constraintTop_toBottomOf="@+id/keyText"></LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
