@@ -26,10 +26,10 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="d42466ef-afbb-4482-a5a7-e2d907f2bdd3">
-        <schema name="information_schema" object-types="table, sequence, view, function" />
-        <schema name="pg_catalog" object-types="table, sequence, view, function" />
-        <schema name="pg_toast" object-types="table, sequence, view, function" />
-        <schema name="public" object-types="table, sequence, view, function" />
+        <schema name="information_schema" object-types="sequence, function, table, view" />
+        <schema name="pg_catalog" object-types="sequence, function, table, view" />
+        <schema name="pg_toast" object-types="sequence, function, table, view" />
+        <schema name="public" object-types="sequence, function, table, view" />
       </connection>
     </loaded-nodes>
   </component>

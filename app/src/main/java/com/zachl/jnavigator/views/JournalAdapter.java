@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,16 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.zachl.jnavigator.R;
 import com.zachl.jnavigator.activities.JournalActivity;
-import com.zachl.jnavigator.objects.Journal;
+import com.zachl.jnavigator.objects.entities.Journal;
 
 import java.util.List;
 
 public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHolder> {
     private List<Object> journals;
     private Context context;
+    private boolean bookmarksOnly;
     public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView title, author;
-        ImageView bookmark;
+        ImageButton bookmark;
         ConstraintLayout layout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -33,9 +34,10 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
             layout = itemView.findViewById(R.id.cLayout);
         }
     }
-    public JournalAdapter(Context context, List<Object> journals){
+    public JournalAdapter(Context context, List<Object> journals, boolean bookmarksOnly){
         this.journals = journals;
         this.context = context;
+        this.bookmarksOnly = bookmarksOnly;
     }
     @NonNull
     @Override
@@ -49,18 +51,14 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
         final Journal journal = (Journal)journals.get(position);
         holder.title.setText(journal.title);
         holder.author.setText(journal.author);
+        BookmarkButton button = new BookmarkButton(context, holder.bookmark, journal);
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, JournalActivity.class);
                 intent.putExtra("journalUrl", journal.url);
+                intent.putExtra("bookmarksOnly", bookmarksOnly);
                 context.startActivity(intent);
-            }
-        });
-        holder.bookmark.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                
             }
         });
     }

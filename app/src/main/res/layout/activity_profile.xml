@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.ProfileActivity">
-
     <ImageView
         android:id="@+id/image"
         android:layout_width="96dp"
@@ -22,23 +21,129 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginTop="1dp"
         android:text="Name"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/image"
         app:layout_constraintStart_toEndOf="@+id/image"
         app:layout_constraintTop_toTopOf="@+id/image" />
 
-    <Button
-        android:id="@+id/changeImage"
-        android:layout_width="83dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="4dp"
-        android:text="Change Picture"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="8sp"
-        app:layout_constraintEnd_toEndOf="@+id/image"
-        app:layout_constraintStart_toStartOf="@+id/image"
+    <TextView
+        android:id="@+id/pushText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Receive Push Notifications:"
+        app:layout_constraintStart_toStartOf="@+id/offlineText"
+        app:layout_constraintTop_toBottomOf="@+id/offlineText" />
+
+    <TextView
+        android:id="@+id/offlineText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="72dp"
+        android:text="Enable Offline Mode:"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image" />
+
+    <TextView
+        android:id="@+id/searchText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Search on Cellular Data:"
+        app:layout_constraintStart_toStartOf="@+id/pushText"
+        app:layout_constraintTop_toBottomOf="@+id/pushText" />
+
+    <TextView
+        android:id="@+id/downloadText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Download Bookmarks on Cellular Data:"
+        app:layout_constraintStart_toStartOf="@+id/searchText"
+        app:layout_constraintTop_toBottomOf="@+id/searchText" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/offline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:checkable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/offlineText"
+        app:layout_constraintStart_toEndOf="@+id/offlineText"
+        app:layout_constraintTop_toTopOf="@+id/offlineText" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/push"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:checkable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/pushText"
+        app:layout_constraintStart_toEndOf="@+id/pushText"
+        app:layout_constraintTop_toTopOf="@+id/pushText" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:checkable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/searchText"
+        app:layout_constraintStart_toEndOf="@+id/searchText"
+        app:layout_constraintTop_toTopOf="@+id/searchText" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:checkable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/downloadText"
+        app:layout_constraintStart_toEndOf="@+id/downloadText"
+        app:layout_constraintTop_toTopOf="@+id/downloadText" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="48dp"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/adminText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Enable Administrator Mode:"
+        app:layout_constraintBottom_toBottomOf="@+id/save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/save" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:checkable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/adminText"
+        app:layout_constraintStart_toEndOf="@+id/adminText"
+        app:layout_constraintTop_toTopOf="@+id/adminText" />
+
+    <Button
+        android:id="@+id/signOut"
+        android:layout_width="108dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:text="Sign Out"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

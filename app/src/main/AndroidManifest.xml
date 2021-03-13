@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zachl.jnavigator">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,23 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".activities.JournalResults"></activity>
-        <activity android:name=".activities.JournalActivity" />
-        <activity android:name=".activities.AdminReviewActivity" />
-        <activity android:name=".activities.UserSubmitActivity" />
-        <activity android:name=".activities.SearchActivity" />
-        <activity android:name=".activities.ProfileActivity" />
-        <activity
-            android:name=".activities.login.LoginActivity"
-            android:label="@string/title_activity_login" />
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.UserJournalActivity"></activity>
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.JournalResults" />
+        <activity android:name=".activities.JournalActivity" />
+        <activity android:name=".activities.AdminReviewActivity" />
+        <activity android:name=".activities.UserSubmitActivity" />
+        <activity android:name=".activities.SearchActivity" />
+        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".activities.MainActivity" />
     </application>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

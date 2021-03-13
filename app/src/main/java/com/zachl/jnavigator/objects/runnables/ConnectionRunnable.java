@@ -1,4 +1,4 @@
-package com.zachl.jnavigator.objects;
+package com.zachl.jnavigator.objects.runnables;
 
 import android.util.Log;
 

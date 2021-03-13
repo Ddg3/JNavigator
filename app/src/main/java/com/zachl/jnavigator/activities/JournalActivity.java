@@ -2,29 +2,40 @@ package com.zachl.jnavigator.activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zachl.jnavigator.R;
-import com.zachl.jnavigator.objects.Journal;
-import com.zachl.jnavigator.objects.JournalManager;
+import com.zachl.jnavigator.objects.entities.Journal;
+import com.zachl.jnavigator.objects.managers.JournalManager;
+import com.zachl.jnavigator.views.BookmarkButton;
+import com.zachl.jnavigator.views.KeywordAdapter;
+
+import java.util.Arrays;
 
 public class JournalActivity extends AppCompatActivity {
-    private LinearLayout horiz;
-    private TextView title, author, date, summary, sample, follow, type;
+    private RecyclerView recycler;
+    private TextView title, author, date, summary, sample, follow, type, urlView;
+    private ImageButton bookmark;
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_journal);
         String url = getIntent().getStringExtra("journalUrl");
-        Journal journal = JournalManager.getByUrl(url);
-        //horiz = findViewById(R.id.hLayout);
+        boolean bookmarksOnly = getIntent().getBooleanExtra("bookmarksOnly", false);
+        Journal journal;
+        if(!bookmarksOnly)
+            journal = JournalManager.getByUrl(url);
+        else
+            journal = JournalManager.getBookmarkByUrl(url);
         title = findViewById(R.id.jTitle);
         author = findViewById(R.id.jAuthor);
         date = findViewById(R.id.jDate);
@@ -32,6 +43,15 @@ public class JournalActivity extends AppCompatActivity {
         sample = findViewById(R.id.jSampleSize);
         follow = findViewById(R.id.jFup);
         type = findViewById(R.id.jType);
+        bookmark = findViewById(R.id.jBookmark);
+        urlView = findViewById(R.id.jUrl);
+
+        recycler = findViewById(R.id.jKeyRecycler);
+        recycler.setLayoutManager(new GridLayoutManager(this, 3));
+        KeywordAdapter adapter = new KeywordAdapter(Arrays.asList(journal.keywords.split(",")));
+        recycler.setAdapter(adapter);
+
+        BookmarkButton button = new BookmarkButton(this, bookmark, journal);
 
         title.setText(journal.title);
         author.setText(journal.author);
@@ -40,21 +60,6 @@ public class JournalActivity extends AppCompatActivity {
         sample.setText("" + journal.sample);
         follow.setText("" + journal.follow + " mo");
         type.setText(journal.type);
-        /*for(String key : journal.keywords.split(",")){
-            Button kButton = new Button(this);
-            kButton.setText(key);
-            kButton.setWidth(96);
-            kButton.setHeight(32);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                kButton.setBackground(getDrawable(R.drawable.oval));
-            }
-            kButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //Help page for keywords/definitions?
-                }
-            });
-            horiz.addView(kButton);
-        }*/
+        urlView.setText(journal.url);
     }
 }

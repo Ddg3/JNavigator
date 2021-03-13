@@ -140,12 +140,14 @@
 
                 <TextView
                     android:id="@+id/jType"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
                     android:layout_marginTop="6dp"
                     android:gravity="right"
                     android:text="TextView"
                     app:layout_constraintEnd_toEndOf="@+id/typeTitle"
+                    app:layout_constraintStart_toEndOf="@+id/jFup"
                     app:layout_constraintTop_toBottomOf="@+id/typeTitle" />
 
                 <TextView
@@ -156,6 +158,46 @@
                     android:text="TextView"
                     app:layout_constraintStart_toStartOf="@+id/sampleTitle"
                     app:layout_constraintTop_toBottomOf="@+id/sampleTitle" />
+
+                <TextView
+                    android:id="@+id/jKeywords"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Keywords:"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/sampleTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/jSampleSize" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/jKeyRecycler"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/jKeywords" />
+
+                <TextView
+                    android:id="@+id/urlTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Url:"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/jKeywords"
+                    app:layout_constraintTop_toBottomOf="@+id/jKeyRecycler" />
+
+                <TextView
+                    android:id="@+id/jUrl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="TextView"
+                    app:layout_constraintStart_toStartOf="@+id/urlTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/urlTitle" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
