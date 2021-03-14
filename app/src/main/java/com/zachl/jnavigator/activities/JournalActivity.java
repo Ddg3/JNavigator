@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -40,8 +41,8 @@ public class JournalActivity extends AppCompatActivity {
         author = findViewById(R.id.jAuthor);
         date = findViewById(R.id.jDate);
         summary = findViewById(R.id.jSummary);
-        sample = findViewById(R.id.jSampleSize);
-        follow = findViewById(R.id.jFup);
+        sample = findViewById(R.id.jSample);
+        follow = findViewById(R.id.jFollow);
         type = findViewById(R.id.jType);
         bookmark = findViewById(R.id.jBookmark);
         urlView = findViewById(R.id.jUrl);
@@ -61,5 +62,6 @@ public class JournalActivity extends AppCompatActivity {
         follow.setText("" + journal.follow + " mo");
         type.setText(journal.type);
         urlView.setText(journal.url);
+        //urlView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }

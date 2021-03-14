@@ -48,9 +48,6 @@ public class LoginActivity extends AppCompatActivity {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-                StrictMode.setThreadPolicy(policy);
-
                 Connection con = ConnectionManager.getConnection();
                 try{
                     String query = "select * from public.\"Users\" where \"EMAIL\" = ?";

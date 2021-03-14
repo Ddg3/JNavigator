@@ -67,9 +67,6 @@ public class JournalResults extends AppCompatActivity {
 
     private List<Object> search(String concat){
         List<Object> journals= new ArrayList<>();
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
         con = ConnectionManager.getConnection();
         String[] fields = concat.split(SEPARATOR);
         final String[] INT_FIELDS = {"SAMPLE", "FOLLOW"};

@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         pfp = findViewById(R.id.pfp);
         bookmark = findViewById(R.id.myBookmarks);
         search = findViewById(R.id.search);
-        save = findViewById(R.id.savedSearches);
+        //save = findViewById(R.id.savedSearches);
         defs = findViewById(R.id.help);
         submit = findViewById(R.id.submit);
         review = findViewById(R.id.review);

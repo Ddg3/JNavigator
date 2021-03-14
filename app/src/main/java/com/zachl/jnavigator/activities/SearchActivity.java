@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zachl.jnavigator.R;
 import com.zachl.jnavigator.views.KeywordAdapter;
@@ -64,10 +65,15 @@ public class SearchActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, JournalResults.class);
-                String fields = getFields();
-                intent.putExtra("fields", fields);
-                startActivity(intent);
+                if(!fieldsEmpty()) {
+                    Intent intent = new Intent(context, JournalResults.class);
+                    String fields = getFields();
+                    intent.putExtra("fields", fields);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(SearchActivity.this, "Must Fill in at least One Field to Search", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -123,5 +129,25 @@ public class SearchActivity extends AppCompatActivity {
             }
         }
         return fields;
+    }
+
+    private boolean fieldsEmpty(){
+        int count = 0;
+        for(View field : fieldViews){
+            if(field instanceof TextView){
+                if (((TextView) field).getText().toString().equalsIgnoreCase("")){
+                    count++;
+                }
+            }
+            else{
+                if(((RecyclerView)field).getChildCount() == 0){
+                    count++;
+                }
+            }
+        }
+        if(count == fieldViews.length){
+            return true;
+        }
+        return false;
     }
 }

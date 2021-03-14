@@ -90,41 +90,42 @@ public class UserSubmitActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-                StrictMode.setThreadPolicy(policy);
-
-                Connection con = ConnectionManager.getConnection();
-                try {
-                    String insert = "insert into public.\"ReviewJournals\"(";
-                    String[] fields = getFields().split(SEPARATOR);
-                    for(String field : fields){
-                        insert += "\"" + field.split(PAIRER)[0] + "\", ";
-                    }
-                    insert = insert.substring(0, insert.length() - 2) + ") VALUES(";
-                    for(String field : fields){
-                        insert += "?,";
-                    }
-                    insert = insert.substring(0, insert.length() - 1) + ")";
-                    PreparedStatement pst = con.prepareStatement(insert);
-                    final String[] INT_FIELDS = {"SAMPLE", "FOLLOW"};
-                    pstLoop:
-                    for(int i = 0; i < fields.length; i++){
-                        for(String intField : INT_FIELDS){
-                            if(fields[i].equalsIgnoreCase(intField)){
-                                pst.setInt(i + 1, Integer.parseInt(fields[i].split(PAIRER)[1].trim()));
-                                continue pstLoop;
-                            }
+                if (!url.getText().toString().equalsIgnoreCase("")) {
+                    Connection con = ConnectionManager.getConnection();
+                    try {
+                        String insert = "insert into public.\"ReviewJournals\"(";
+                        String[] fields = getFields().split(SEPARATOR);
+                        for (String field : fields) {
+                            insert += "\"" + field.split(PAIRER)[0] + "\", ";
                         }
-                        pst.setString(i + 1, fields[i].split(PAIRER)[1].trim());
+                        insert = insert.substring(0, insert.length() - 2) + ") VALUES(";
+                        for (String field : fields) {
+                            insert += "?,";
+                        }
+                        insert = insert.substring(0, insert.length() - 1) + ")";
+                        PreparedStatement pst = con.prepareStatement(insert);
+                        final String[] INT_FIELDS = {"SAMPLE", "FOLLOW"};
+                        pstLoop:
+                        for (int i = 0; i < fields.length; i++) {
+                            for (String intField : INT_FIELDS) {
+                                if (fields[i].equalsIgnoreCase(intField)) {
+                                    pst.setInt(i + 1, Integer.parseInt(fields[i].split(PAIRER)[1].trim()));
+                                    continue pstLoop;
+                                }
+                            }
+                            pst.setString(i + 1, fields[i].split(PAIRER)[1].trim());
+                        }
+                        pst.executeUpdate();
+                        pst.close();
+                        Toast.makeText(UserSubmitActivity.this, "Sent Journal in for Review! Thank you for your contribution", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(context, MainActivity.class);
+                        startActivity(intent);
+                    } catch (SQLException e) {
+                        Log.d("UserSubmitActivity", e.getMessage());
                     }
-                    pst.executeUpdate();
-                    pst.close();
-                    Toast.makeText(UserSubmitActivity.this, "Sent Journal in for Review! Thank you for your contribution", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(context, MainActivity.class);
-                    startActivity(intent);
                 }
-                catch(SQLException e){
-                    Log.d("UserSubmitActivity", e.getMessage());
+                else{
+                    Toast.makeText(context, "The Url Field must be filled in to submit a journal", Toast.LENGTH_LONG).show();
                 }
             }
         });

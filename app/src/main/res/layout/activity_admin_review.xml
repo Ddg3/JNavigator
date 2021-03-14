@@ -28,8 +28,12 @@
         app:layout_constraintTop_toBottomOf="@+id/userSubmittedText" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/adminRecycler"
         android:layout_width="409dp"
         android:layout_height="656dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="74dp" />
+        android:layout_marginTop="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider5" />
 </androidx.constraintlayout.widget.ConstraintLayout>
