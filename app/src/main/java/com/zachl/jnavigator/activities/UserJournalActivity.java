@@ -23,6 +23,8 @@ import com.zachl.jnavigator.R;
 import com.zachl.jnavigator.objects.entities.Journal;
 import com.zachl.jnavigator.objects.managers.ConnectionManager;
 import com.zachl.jnavigator.objects.managers.JournalManager;
+import com.zachl.jnavigator.objects.managers.SqlManager;
+import com.zachl.jnavigator.views.AddKeywordButton;
 import com.zachl.jnavigator.views.KeywordAdapter;
 
 import org.w3c.dom.Text;
@@ -80,36 +82,14 @@ public class UserJournalActivity extends AppCompatActivity {
             j.keywords = "";
         adapter = new KeywordAdapter(Arrays.asList(j.keywords.split(",")));
         recycler.setAdapter(adapter);
-        addKey.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
-                View popup = inflater.inflate(R.layout.keyword_popup, null);
-                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                boolean focusable = true;
-                final PopupWindow window = new PopupWindow(popup, width, height, focusable);
-                window.showAtLocation(addKey, Gravity.CENTER, 0,0);
 
-                final EditText name = popup.findViewById(R.id.keyPopField);
-                Button enter = popup.findViewById(R.id.addKeyPop);
-                enter.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        keys.add(name.getText().toString());
-                        adapter = new KeywordAdapter(keys);
-                        recycler.setAdapter(adapter);
-                        window.dismiss();
-                    }
-                });
-            }
-        });
+        AddKeywordButton button = new AddKeywordButton(this, keys, addKey, adapter, recycler);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Connection con = ConnectionManager.getConnection();
-                String[] fields = getFields().split(SEPARATOR);
+                String[] fields = SqlManager.getFields(getApplicationContext(), fieldViews).split(SEPARATOR);
                 String query = "update public.\"ReviewJournals\" SET ";
                 for(String field : fields){
                     query += "\"" + field.split(PAIRER)[0] + "\" = ?, ";
@@ -153,7 +133,7 @@ public class UserJournalActivity extends AppCompatActivity {
         approve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!fieldsEmpty()) {
+                if (!SqlManager.fieldsEmpty(fieldViews)) {
                     Connection connection = ConnectionManager.getConnection();
                     String query = "insert into public.\"Journals\"(\"TITLE\", \"AUTHOR\", \"DATE\", \"SUMMARY\", \"SAMPLE\", \"FOLLOW\", \"TYPE\", \"JOURNAL\", \"URL\", \"KEYWORDS\") " +
                             "VALUES(?,?,?,?,?,?,?,?,?,?)";
@@ -168,7 +148,7 @@ public class UserJournalActivity extends AppCompatActivity {
                         st.setString(7, type.getText().toString().trim());
                         st.setString(8, "null");
                         st.setString(9, url.getText().toString().trim());
-                        st.setString(10, getKeywords());
+                        st.setString(10, SqlManager.getKeywords(recycler));
                         st.executeUpdate();
                     } catch (SQLException e) {
                         Log.e("UserJournalActivity", e.getMessage());
@@ -200,53 +180,5 @@ public class UserJournalActivity extends AppCompatActivity {
     private Intent backToHome(){
         Intent intent = new Intent(this, MainActivity.class);
         return intent;
-    }
-
-    private String getFields(){
-        String fields = "";
-        for(View view : fieldViews){
-            if(view instanceof TextView){
-                String name = getResources().getResourceEntryName(view.getId()).replaceFirst("j", "");
-                String content = ((TextView) view).getText().toString();
-                if(!content.equalsIgnoreCase(""))
-                    fields += name.toUpperCase() + PAIRER + content + SEPARATOR;
-            }
-            else if(view instanceof RecyclerView){
-                int count = ((RecyclerView) view).getChildCount();
-                for(int i = 0; i < count; i++){
-                    View child = ((ConstraintLayout)((RecyclerView) view).getChildAt(i)).getChildAt(0);
-                    String content = ((TextView)child).getText().toString();
-                    fields += "KEYWORDS" + PAIRER + content + SEPARATOR;
-                }
-            }
-        }
-        return fields;
-    }
-
-    private boolean fieldsEmpty(){
-        for(View field : fieldViews){
-            if(field instanceof TextView){
-                if (((TextView) field).getText().toString().equalsIgnoreCase("")){
-                    return true;
-                }
-            }
-            else{
-                if(((RecyclerView)field).getChildCount() == 0){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    private String getKeywords(){
-        String result = "";
-        int childCount = recycler.getChildCount();
-        for(int i = 0; i < childCount; i++){
-            View child = ((ConstraintLayout)recycler.getChildAt(i)).getChildAt(0);
-            String content = ((TextView)child).getText().toString();
-            result += content + ", ";
-        }
-        result = result.substring(0, result.length() - 2);
-        return result;
     }
 }

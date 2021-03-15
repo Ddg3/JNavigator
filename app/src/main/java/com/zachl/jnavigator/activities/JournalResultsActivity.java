@@ -23,7 +23,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JournalResults extends AppCompatActivity {
+public class JournalResultsActivity extends AppCompatActivity {
     private static final String SEPARATOR = "==", PAIRER = "::";
     private RecyclerView recycler;
     private Connection con;
@@ -62,7 +62,6 @@ public class JournalResults extends AppCompatActivity {
         JournalAdapter adapter = new JournalAdapter(this, journals, bookmarksOnly);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setAdapter(adapter);
-        recycler.setItemAnimator(new DefaultItemAnimator());
     }
 
     private List<Object> search(String concat){
@@ -71,7 +70,7 @@ public class JournalResults extends AppCompatActivity {
         String[] fields = concat.split(SEPARATOR);
         final String[] INT_FIELDS = {"SAMPLE", "FOLLOW"};
         try{
-            String query = "select * from public.\"Journals\" where"; //where \"AUTHOR\" like '%' || ? || '%';"
+            String query = "select * from public.\"Journals\" where";
             fieldLoop:
             for(String field : fields){
                 for(String intField : INT_FIELDS) {

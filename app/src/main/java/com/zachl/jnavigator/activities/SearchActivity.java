@@ -20,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zachl.jnavigator.R;
+import com.zachl.jnavigator.objects.managers.SqlManager;
+import com.zachl.jnavigator.views.AddKeywordButton;
 import com.zachl.jnavigator.views.KeywordAdapter;
 
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ public class SearchActivity extends AppCompatActivity {
     private TextView title, author, type, url;
     private TextView sampleMin, sampleMax, followMin, followMax;
     private RecyclerView keywords;
-    private Button search, save;
+    private Button search;
     private KeywordAdapter adapter;
     private ImageButton addKey;
     private List<String> keys = new ArrayList<>();
@@ -53,7 +55,6 @@ public class SearchActivity extends AppCompatActivity {
         url = findViewById(R.id.urlField);
         keywords = findViewById(R.id.keywords);
         search = findViewById(R.id.searchButton);
-        save = findViewById(R.id.saveSearch);
         addKey = findViewById(R.id.addKey);
 
         fieldViews = new View[]{title, author, sampleMax, sampleMin, followMax, followMin, url, keywords, type};
@@ -65,9 +66,9 @@ public class SearchActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!fieldsEmpty()) {
-                    Intent intent = new Intent(context, JournalResults.class);
-                    String fields = getFields();
+                if(!SqlManager.allFieldsEmpty(fieldViews)) {
+                    Intent intent = new Intent(context, JournalResultsActivity.class);
+                    String fields = SqlManager.getFields(context, fieldViews);
                     intent.putExtra("fields", fields);
                     startActivity(intent);
                 }
@@ -77,77 +78,6 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        addKey.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
-                View popup = inflater.inflate(R.layout.keyword_popup, null);
-                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                boolean focusable = true;
-                final PopupWindow window = new PopupWindow(popup, width, height, focusable);
-                window.showAtLocation(addKey, Gravity.CENTER, 0,0);
-
-                final EditText name = popup.findViewById(R.id.keyPopField);
-                Button enter = popup.findViewById(R.id.addKeyPop);
-                enter.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        keys.add(name.getText().toString());
-                        adapter = new KeywordAdapter(keys);
-                        keywords.setAdapter(adapter);
-                        window.dismiss();
-                    }
-                });
-            }
-        });
-    }
-
-    private String getFields(){
-        String fields = "";
-        for(View view : fieldViews){
-            if(view instanceof TextView){
-                String name = getResources().getResourceEntryName(view.getId()).replace("Field", "");
-                String content = ((TextView) view).getText().toString();
-                if(!content.equalsIgnoreCase(""))
-                    fields += name.toUpperCase() + PAIRER + content + SEPARATOR;
-            }
-            else if(view instanceof RecyclerView){
-                int count = ((RecyclerView) view).getChildCount();
-                for(int i = 0; i < count; i++){
-                    View child = ((ConstraintLayout)((RecyclerView) view).getChildAt(i)).getChildAt(0);
-                    String content = ((TextView)child).getText().toString();
-                    fields += "KEYWORDS" + PAIRER + content + SEPARATOR;
-                }
-            }
-        }
-        return fields;
-    }
-
-    private boolean fieldsEmpty(){
-        int count = 0;
-        for(View field : fieldViews){
-            if(field instanceof TextView){
-                if (((TextView) field).getText().toString().equalsIgnoreCase("")){
-                    count++;
-                }
-            }
-            else{
-                if(((RecyclerView)field).getChildCount() == 0){
-                    count++;
-                }
-            }
-        }
-        if(count == fieldViews.length){
-            return true;
-        }
-        return false;
+        AddKeywordButton button = new AddKeywordButton(this, keys, addKey, adapter, keywords);
     }
 }

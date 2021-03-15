@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zachl.jnavigator.R;
 import com.zachl.jnavigator.objects.entities.User;
@@ -18,7 +19,7 @@ import com.zachl.jnavigator.objects.runnables.RoomRunnable;
 
 public class MainActivity extends AppCompatActivity {
     private ImageButton pfp, bookmark;
-    private Button search, save, defs, submit, review;
+    private Button search, defs, submit, review;
     private TextView welcome;
     private static Context context;
     @Override
@@ -32,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         pfp = findViewById(R.id.pfp);
         bookmark = findViewById(R.id.myBookmarks);
         search = findViewById(R.id.search);
-        //save = findViewById(R.id.savedSearches);
         defs = findViewById(R.id.help);
         submit = findViewById(R.id.submit);
         review = findViewById(R.id.review);
@@ -61,15 +61,20 @@ public class MainActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, SearchActivity.class);
-                context.startActivity(intent);
+                if(!PreferenceManager.getUser().offline) {
+                    Intent intent = new Intent(context, SearchActivity.class);
+                    context.startActivity(intent);
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Cannot Search while Offline!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         bookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, JournalResults.class);
+                Intent intent = new Intent(context, JournalResultsActivity.class);
                 intent.putExtra("bookmarksOnly", true);
                 context.startActivity(intent);
             }

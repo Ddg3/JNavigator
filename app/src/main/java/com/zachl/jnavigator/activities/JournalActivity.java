@@ -37,6 +37,7 @@ public class JournalActivity extends AppCompatActivity {
             journal = JournalManager.getByUrl(url);
         else
             journal = JournalManager.getBookmarkByUrl(url);
+
         title = findViewById(R.id.jTitle);
         author = findViewById(R.id.jAuthor);
         date = findViewById(R.id.jDate);
@@ -62,6 +63,5 @@ public class JournalActivity extends AppCompatActivity {
         follow.setText("" + journal.follow + " mo");
         type.setText(journal.type);
         urlView.setText(journal.url);
-        //urlView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }

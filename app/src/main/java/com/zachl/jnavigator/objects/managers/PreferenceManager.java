@@ -27,18 +27,4 @@ public class PreferenceManager {
             user = new User();
         return user;
     }
-    public static void saveSearch(String search, String name){
-        SharedPreferences.Editor edit = prefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(search);
-        edit.putString("search:" + name, json);
-        edit.apply();
-    }
-
-    public static String getSearch(String name){
-        Gson gson = new Gson();
-        String json = prefs.getString("search:" + name, "");
-        String result = gson.fromJson(json, String.class);
-        return result;
-    }
 }

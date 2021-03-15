@@ -20,7 +20,7 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/submitSub"
+                    android:id="@+id/submit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
@@ -30,7 +30,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/keywords" />
 
                 <EditText
-                    android:id="@+id/urlFieldSub"
+                    android:id="@+id/urlField"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -41,7 +41,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/urlTextSub" />
 
                 <ImageButton
-                    android:id="@+id/addKeySub"
+                    android:id="@+id/addKey"
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
                     android:layout_marginStart="16dp"
@@ -161,7 +161,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/urlFieldSub" />
+                    app:layout_constraintTop_toBottomOf="@+id/urlField" />
 
                 <TextView
                     android:id="@+id/optionalDesc"
@@ -207,18 +207,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/keyTextSub" />
 
-                <Button
-                    android:id="@+id/submitBypass"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Submit And Bypass Review"
-                    app:layout_constraintEnd_toEndOf="@+id/submitSub"
-                    app:layout_constraintStart_toStartOf="@+id/submitSub"
-                    app:layout_constraintTop_toBottomOf="@+id/submitSub" />
-
                 <EditText
-                    android:id="@+id/titleFieldSub"
+                    android:id="@+id/titleField"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -232,7 +222,7 @@
                     app:layout_constraintTop_toTopOf="@+id/titleTextSub" />
 
                 <EditText
-                    android:id="@+id/authorFieldSub"
+                    android:id="@+id/authorField"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -245,7 +235,7 @@
                     app:layout_constraintTop_toTopOf="@+id/authorTextSub" />
 
                 <EditText
-                    android:id="@+id/summaryFieldSub"
+                    android:id="@+id/summaryField"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -258,7 +248,7 @@
                     app:layout_constraintTop_toTopOf="@+id/summaryTextSub" />
 
                 <EditText
-                    android:id="@+id/followFieldSub"
+                    android:id="@+id/followField"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -271,7 +261,7 @@
                     app:layout_constraintTop_toTopOf="@+id/followTextSub" />
 
                 <EditText
-                    android:id="@+id/typeFieldSub"
+                    android:id="@+id/typeField"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -284,7 +274,7 @@
                     app:layout_constraintTop_toTopOf="@+id/studyTextSub" />
 
                 <EditText
-                    android:id="@+id/dateFieldSub"
+                    android:id="@+id/dateField"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -297,7 +287,7 @@
                     app:layout_constraintTop_toTopOf="@+id/dateTextSub" />
 
                 <EditText
-                    android:id="@+id/sampleFieldSub"
+                    android:id="@+id/sampleField"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
